@@ -22,7 +22,7 @@ pipeline {
                  echo 'deploy'
                  sh 'npm install'
                  sh ' npm run build'
-                sh 'mv dist/gestion-des-transports-front/browser/* /var/www/html'
+                sh 'cp dist/gestion-des-transports-front/browser/* /var/www/html'
                 
             }
         }
