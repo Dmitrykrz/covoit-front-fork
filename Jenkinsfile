@@ -54,7 +54,7 @@ pipeline {
           
         }
         
-    }
+    
    always {
             echo '=========================Cleanup========================='
                    
@@ -63,5 +63,5 @@ pipeline {
                sh 'sudo rm -rf /var/www/html/*'
                sh 'sudo rm -rf /var/www/html.backup'
                
-        }
+        }}
 }
