@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage("Dependances") {
+        stage("==================================Dependances==================================") {
             steps {
                
                 sh 'sudo apt-get update'
@@ -12,37 +12,36 @@ pipeline {
         stage('Checkout') {
             steps {
                 
-                echo 'checkout'
+                echo '=========================Checkout========================='
                 git branch: 'main', url: 'https://github.com/Dmitrykrz/covoit-front-fork'
                 sh 'ls'
             }
         }
         stage('Deploy') {
             steps {
-                 echo 'deploy'
+                 echo '=========================Deploy=================================='
                  sh 'npm install'
                  sh ' npm run build'
                 sh 'cp -r dist/gestion-des-transports-front/browser/* /var/www/html'
                 
             }
         }
-        stage('Test') {
+        stage('==================================Test==================================') {
             steps {
                sh 'curl http://localhost'
+               sh 'curl http://localhost | grep -q "GestionDesTransportsFront" || (echo "ERROR: GestionDesTransportsFront not found!" && exit 1)'
             }
         }
     }
     post {
         success {
             echo 'All is good !'
-            // Action en cas de succès
+          
         }
         failure {
            
             echo 'Pipeline failed!'
         }
-        always {
-           echo 'always'
-        }
+        
     }
 }
