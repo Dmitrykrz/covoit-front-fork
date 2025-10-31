@@ -1,39 +1,43 @@
 pipeline {
-agent any
-stages {
-stage("Dependances") {
-steps {
-// Installer apache2
-}
-}
-stage('Checkout') {
-steps {
-// Récupération du code
-}
-}
-stage('Deploy') {
-steps {
-// Copie des fichiers vers le serveur web (/var/www/html/)
-}
-}
-stage('Test') {
-steps {
-// Vérification du déploiement
-}
-}
-}
-post {
-success {
-  echo 'All is good !'
-// Action en cas de succès (echo, ou autre)
-}
-failure {
-// Action en cas d'échec
-}
-always {
-// Nettoyage
-// Supprimer les fichiers copiés dans /var/www/html
-// Desinstaller apache2
-}
-}
+    agent any
+    stages {
+        stage("Dependances") {
+            steps {
+               
+                sh 'sudo apt-get update'
+                sh 'sudo apt-get install -y apache2'
+                sh 'sudo systemctl start apache2'
+            }
+        }
+        stage('Checkout') {
+            steps {
+                
+                echo 'checkout'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                 echo 'deploy'
+                
+            }
+        }
+        stage('Test') {
+            steps {
+               
+            }
+        }
+    }
+    post {
+        success {
+            echo 'All is good !'
+            // Action en cas de succès
+        }
+        failure {
+           
+            echo 'Pipeline failed!'
+        }
+        always {
+           echo 'always'
+        }
+    }
 }
