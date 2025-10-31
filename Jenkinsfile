@@ -28,7 +28,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo 'curl localhost'
+               sh 'curl http://localhost'
             }
         }
     }
