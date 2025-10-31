@@ -24,7 +24,7 @@ steps {
 }
 post {
 success {
-  echo 'All is good!'
+  echo 'All is good !'
 // Action en cas de succès (echo, ou autre)
 }
 failure {
