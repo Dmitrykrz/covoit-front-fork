@@ -1,6 +1,15 @@
 pipeline {
     agent any
     stages {
+
+      stage('==================================Backup==================================') {
+            steps {                
+                sh 'sudo cp -r /var/www/html /var/www/html.backup'
+                
+            }
+        }
+
+      
         stage("==================================Dependances==================================") {
             steps {
                
@@ -36,12 +45,23 @@ pipeline {
     post {
         success {
             echo 'All is good !'
-          
+            sh 'sudo rm -rf /var/www/html.backup'          
         }
         failure {
            
-            echo 'Pipeline failed!'
+            echo 'Pipeline failed!'         
+          sh 'sudo cp -r /var/www/html.backup/* /var/www/html/'
+          
         }
         
     }
+   always {
+            echo '=========================Cleanup========================='
+                   
+                
+                
+               sh 'sudo rm -rf /var/www/html/*'
+               sh 'sudo rm -rf /var/www/html.backup'
+               
+        }
 }
