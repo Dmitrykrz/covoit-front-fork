@@ -13,17 +13,22 @@ pipeline {
             steps {
                 
                 echo 'checkout'
+                git branch: 'main', url: 'https://github.com/Dmitrykrz/covoit-front-fork'
+                sh 'ls'
             }
         }
         stage('Deploy') {
             steps {
                  echo 'deploy'
+                 sh 'npm install'
+                 sh ' npm run build'
+                sh 'mv dist/gestion-des-transports-front/browser/* /var/www/html'
                 
             }
         }
         stage('Test') {
             steps {
-                echo 'test'
+                echo 'curl localhost'
             }
         }
     }
