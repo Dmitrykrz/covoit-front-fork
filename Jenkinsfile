@@ -44,7 +44,7 @@ pipeline {
     }
     post {
         success {
-            echo 'All is good !'
+            echo 'All is good!'
             sh 'sudo rm -rf /var/www/html.backup'          
         }
         failure {
